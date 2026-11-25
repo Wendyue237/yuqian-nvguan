@@ -540,9 +540,9 @@ body:has(.game-shell) {
 }
 
 .log-scroll {
-  max-height: clamp(132px, 24vh, 224px);
-  overflow-y: auto;
-  padding-right: 8px;
+  max-height: none;
+  overflow: visible;
+  padding-right: 0;
   margin-top: 14px;
   scrollbar-width: thin;
   scrollbar-color: rgba(112, 82, 43, 0.3) transparent;
@@ -1348,6 +1348,170 @@ body:has(.game-shell) {
   50% { opacity: 1; }
 }
 
+
+/* ---------- 信息优先级：身份 / 考功 / 人情 / 复盘 ---------- */
+
+.exam-list {
+  margin-top: 9px;
+  display: grid;
+  gap: 4px;
+}
+
+.exam-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto 12px;
+  align-items: baseline;
+  gap: 8px;
+  color: var(--muted-dark);
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+.exam-row span { white-space: nowrap; }
+.exam-row b { color: var(--paper); font-weight: 500; font-size: 11px; }
+.exam-row b small { color: var(--muted); font-size: 9px; font-weight: 400; }
+.exam-row em { font-style: normal; text-align: right; }
+.exam-row.ok em { color: #9fc0a3; }
+.exam-row.bad em { color: #df8c77; }
+.exam-row.bad b { color: #e3a08d; }
+
+.evidence-goal.ok { color: #a8c7a9; }
+.evidence-goal.warn { color: #d9b26a; }
+
+.evidence-checks {
+  display: grid;
+  gap: 3px;
+  margin-top: 6px;
+  font-family: var(--sans);
+  font-size: 9.5px;
+  letter-spacing: 0.02em;
+  line-height: 1.55;
+}
+
+.evidence-checks .ok { color: #a8c7a9; }
+.evidence-checks .bad { color: #c79280; }
+
+.log-more {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 9px 0 2px;
+  border: 0;
+  border-top: 1px dashed rgba(112, 82, 43, 0.22);
+  color: #6f522f;
+  background: transparent;
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-align: left;
+  cursor: pointer;
+}
+
+.log-more:hover { color: #9a2f1f; }
+.log-more span { color: #9b7c54; }
+
+.log-modal-list {
+  max-height: 58vh;
+  overflow-y: auto;
+  padding-right: 8px;
+  margin-top: 4px;
+}
+
+.bond-strip {
+  display: flex;
+  align-items: stretch;
+  margin-top: 14px;
+  border: 1px solid var(--line);
+  background: rgba(19, 29, 31, 0.82);
+}
+
+.bond-strip-title {
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  color: var(--red);
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  white-space: nowrap;
+}
+
+.bond-chip {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 0;
+  border-left: 1px solid rgba(112, 82, 43, 0.18);
+  color: var(--paper);
+  background: transparent;
+  font-family: var(--sans);
+  cursor: pointer;
+  text-align: left;
+}
+
+.bond-chip:hover { background: rgba(183, 138, 75, 0.09); }
+.bond-chip:hover .bond-name { color: var(--red); }
+.bond-name { font-size: 11px; white-space: nowrap; }
+.bond-chip b { margin-left: auto; color: var(--muted-dark); font-size: 9px; font-weight: 400; white-space: nowrap; }
+
+.bond-pips { display: flex; gap: 2px; flex: 0 1 auto; }
+.bond-pips i {
+  width: 7px;
+  height: 7px;
+  border: 1px solid rgba(112, 82, 43, 0.3);
+  transform: rotate(45deg);
+}
+.bond-pips i.on { background: var(--red); border-color: var(--red); }
+
+.ending-review {
+  max-width: 640px;
+  margin: 18px auto 0;
+  padding: 14px 18px 13px;
+  border-top: 1px dashed rgba(112, 82, 43, 0.32);
+  border-bottom: 0;
+  background: transparent;
+}
+
+.review-head {
+  margin-bottom: 9px;
+  color: #9a2f1f;
+  font-family: var(--sans);
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+}
+
+.review-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+}
+
+.review-item {
+  color: #6b563d;
+  font-family: var(--sans);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+}
+
+.review-item b { margin-left: 5px; color: #3f2c1c; font-weight: 600; }
+.review-item.ok b { color: #3f6b4a; }
+.review-item.bad b { color: #9a2f1f; }
+
+.review-hint {
+  margin: 10px 0 0;
+  color: #5d4a35;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
 /* ---------- 响应式 ---------- */
 
 button:focus-visible,
@@ -1429,7 +1593,7 @@ button:focus-visible,
     padding: 18px 16px;
   }
 
-  .log-scroll { max-height: 126px; }
+  .log-scroll { max-height: none; overflow: visible; }
 
   .actions {
     grid-template-columns: 1fr 1fr;
@@ -1449,11 +1613,32 @@ button:focus-visible,
   }
 
   .modal-card {
-    padding: 26px 20px 22px;
+    padding: 20px 18px 18px;
   }
 
   .modal-card h2 {
-    font-size: 23px;
+    margin: 10px 0 14px;
+    font-size: 22px;
+  }
+
+  .modal-card p {
+    margin-bottom: 10px;
+    font-size: 13.5px;
+    line-height: 1.8;
+  }
+
+  .modal-choices {
+    gap: 6px;
+    margin-top: 16px;
+  }
+
+  .choice-btn {
+    padding: 11px 13px;
+  }
+
+  .choice-btn small {
+    font-size: 10.5px;
+    line-height: 1.6;
   }
 
   .ending-body {
@@ -1476,6 +1661,153 @@ button:focus-visible,
   }
 }
 
+@media (max-width: 680px) {
+  .brand h1 { font-size: 18px; }
+  .brand span { display: block; font-size: 9px; letter-spacing: 0.08em; }
+  .brand { gap: 9px; }
+
+  .bond-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .bond-strip-title {
+    grid-column: 1 / -1;
+    padding: 7px 10px;
+    border-bottom: 1px solid rgba(112, 82, 43, 0.18);
+  }
+
+  .bond-chip {
+    padding: 8px 10px;
+    border-left: 0;
+    border-top: 1px solid rgba(112, 82, 43, 0.14);
+  }
+
+  .bond-chip:nth-child(odd) { border-right: 1px solid rgba(112, 82, 43, 0.14); }
+  .bond-pips i { width: 6px; height: 6px; }
+
+  .ending-review { margin-inline: 0; padding: 14px 0 0; }
+  .review-grid { gap: 5px 12px; }
+  .log-modal-list { max-height: 56vh; }
+}
+
+.log-modal-meta {
+  margin: 2px 0 4px;
+  color: #9b7c54;
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+}
+
+
+@media (max-width: 680px) {
+  .log-entry:nth-child(n+3) { display: none; }
+}
+
+.review-cond {
+  margin: 8px 0 0;
+  color: #6b563d;
+  font-family: var(--sans);
+  font-size: 10.5px;
+  line-height: 1.7;
+}
+
+.spec-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 0 9px;
+  color: var(--gold-soft);
+  background: rgba(183, 138, 75, 0.08);
+  border: 1px solid rgba(183, 138, 75, 0.4);
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.spec-badge span {
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+}
+
+.spec-badge:hover {
+  background: rgba(183, 138, 75, 0.18);
+  border-color: var(--gold-soft);
+}
+
+.spec-badge.used {
+  opacity: 0.62;
+}
+
+@media (max-width: 680px) {
+  .spec-badge {
+    min-height: 30px;
+    padding: 0 6px;
+    gap: 3px;
+    font-size: 9px;
+    letter-spacing: 0.04em;
+  }
+  .spec-badge span {
+    display: inline;
+    font-size: 8px;
+    letter-spacing: 0.08em;
+  }
+}
+
+.start-note {
+  margin-top: -2px;
+  padding-left: 10px;
+  color: var(--gold-soft) !important;
+  border-left: 2px solid rgba(183, 138, 75, 0.55);
+  font-size: 11px !important;
+  line-height: 1.7 !important;
+  letter-spacing: 0.04em;
+}
+
+/* 七选一终局：压缩选项高度，保证桌面一屏可读 */
+.modal-choices.dense {
+  gap: 8px;
+}
+
+.modal-choices.dense .choice-btn {
+  padding: 10px 14px;
+}
+
+.modal-choices.dense .choice-btn small {
+  margin-top: 2px;
+  font-size: 11.5px;
+}
+
+@media (min-width: 760px) {
+  .modal-choices.dense .choice-btn small {
+    display: none;
+  }
+}
+
+.modal-card.dense-card {
+  max-height: 93vh;
+}
+
+.modal-scroll-cue {
+  position: relative;
+  z-index: 1;
+  margin-top: 12px;
+  color: var(--red);
+  font-family: var(--sans);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+}
+
+.log-entry.festival {
+  border-left-color: #b78a4b;
+  background: rgba(183, 138, 75, 0.13);
+  color: #44311c;
+}
+
 </style>
 </head>
 <body>
@@ -1494,6 +1826,7 @@ button:focus-visible,
   const MAX_DAY = 30;
   const SAVE_KEY = 'yuqian_nv_guan_save_v1';
   const GALLERY_KEY = 'yuqian_nv_guan_endings_v1';
+  const PRE_FINALE_KEY = 'yuqian_nv_guan_pre_finale_v1';
 
   const RANKS = [
     { name: '抄录女史', salary: 5, note: '典簿司最末一等，抄书、校字、守值房。' },
@@ -1652,6 +1985,329 @@ button:focus-visible,
       ]
     }
   };
+
+  const BOND_ARCS = {
+    gu: [
+      {
+        stage: 2,
+        kicker: '人情 · 顾清和',
+        title: '一份没有落款的旧口供',
+        body: [
+          '顾清和把你叫进值房，关上门，从袖中抽出一份旧口供。',
+          '口供上是姐姐的字，落款处却空着。“当年她不愿意按手印，是我替她压下去的。”',
+          '“你现在查的，不只是曹弼。想清楚。”'
+        ],
+        choices: [
+          {
+            label: '问她：当年为什么保姐姐？',
+          mark: 'asked_gu',
+            sub: '信任 +3 · 心情 −2',
+            mark: 'gu_why',
+            effect: () => applyMods({ trust: 3, mood: -2 }),
+            log: '顾清和没有回答。她把口供收回去，说：“你姐姐也问过同样的话。”'
+          },
+          {
+            label: '只谈公事，把口供抄进呈文',
+            sub: '清誉 +2 · 信任 +1',
+            mark: 'gu_prof',
+            effect: () => applyMods({ reputation: 2, trust: 1 }),
+            log: '你把口供里能用的部分抄进呈文。顾清和看着你落笔，没有阻止。'
+          },
+          {
+            label: '把口供藏一份在鞋底',
+            sub: '手段 +2 · 危机 +3',
+            mark: 'gu_copy',
+            effect: () => applyMods({ scheme: 2, risk: 3 }),
+            log: '你趁顾清和转身，把口供折成小方块塞进鞋底。她没有回头。'
+          }
+        ]
+      },
+      {
+        stage: 4,
+        kicker: '人情 · 顾清和',
+        title: '她把奏本推到你面前',
+        body: [
+          '顾清和把一份已经写好的奏本推过来。落款处空着，旁边放着她的印。',
+          '“我保你姐姐，不是因为她无辜。是因为当年我没有保。”',
+          '“这一次，你签，还是我签？”'
+        ],
+        choices: [
+          {
+            label: '请她签，自己上堂作证',
+            sub: '信任 +5 · 心情 +3',
+            mark: 'gu_trust',
+            effect: () => applyMods({ trust: 5, mood: 3 }),
+            log: '顾清和按下印。朱泥落在纸上，她的手很稳。'
+          },
+          {
+            label: '把奏本留下，当作最后的底牌',
+            sub: '手段 +3 · 危机 +4 · 信任 −2',
+            mark: 'gu_use',
+            effect: () => applyMods({ scheme: 3, risk: 4, trust: -2 }),
+            log: '你把奏本收进袖中。顾清和看了你一眼，把印收了回去。'
+          }
+        ]
+      }
+    ],
+    pei: [
+      {
+        stage: 2,
+        kicker: '人情 · 裴小满',
+        title: '她父亲被扣在通州仓',
+        body: [
+          '裴小满蹲在廊下，眼睛肿着。她父亲在通州仓做吏，昨夜被曹家的人扣了。',
+          '“他们说，只要我把库里的旧簿换掉，就放我爹。”',
+          '她抓住你的袖子：“沈姐姐，我该怎么办？”'
+        ],
+        choices: [
+          {
+            label: '让她别换，你替她想别的办法',
+            sub: '人望 +3 · 心情 +3',
+            mark: 'pei_protect',
+            effect: () => applyMods({ popularity: 3, mood: 3 }),
+            log: '你让裴小满把旧簿原样放回去。她一边哭一边点头。'
+          },
+          {
+            label: '让她换，但把原本抄一份给你',
+            sub: '手段 +2 · 危机 +3',
+            mark: 'pei_use',
+            effect: () => applyMods({ scheme: 2, risk: 3 }),
+            log: '裴小满犹豫了很久，最后还是把抄本塞进你手里。'
+          },
+          {
+            label: '让她自己决定，你别插手',
+            sub: '清誉 −2 · 心情 −2',
+            mark: 'pei_decline',
+            effect: () => applyMods({ reputation: -2, mood: -2 }),
+            log: '你转身走了。身后传来裴小满压得很低的哭声。'
+          }
+        ]
+      },
+      {
+        stage: 4,
+        kicker: '人情 · 裴小满',
+        title: '她从通州带回来一本旧簿',
+        body: [
+          '裴小满把一本被雨泡皱的旧簿藏在食盒底下，带进了宫。',
+          '“我爹说，这是那年换粮的底账。他让我交给你，别交给别人。”',
+          '她的手一直在抖，但眼睛很亮。'
+        ],
+        choices: [
+          {
+            label: '收下，答应带她上堂',
+            sub: '人望 +2 · 获得「通州车马」线索',
+            mark: 'pei_witness',
+            effect: () => {
+              addClue('witness');
+              applyMods({ popularity: 2 });
+            },
+            log: '你把旧簿收好，对裴小满说：“到时候，你站在我身后。”'
+          },
+          {
+            label: '收下，但让她留在宫外',
+            sub: '清誉 +2 · 心情 −1',
+            mark: 'pei_quiet',
+            effect: () => applyMods({ reputation: 2, mood: -1 }),
+            log: '裴小满点头，把食盒留给你，自己走了。'
+          }
+        ]
+      }
+    ],
+    lu: [
+      {
+        stage: 2,
+        kicker: '人情 · 陆知微',
+        title: '他让你替他还一个人情',
+        body: [
+          '陆知微在宫门外等你，手里捏着一张刑部的牌票。',
+          '“曹弼的人盯上我了。你替我走一趟汇通号，把这张票子兑了。”',
+          '“兑出来的银子，算你一半。”'
+        ],
+        choices: [
+          {
+            label: '替他去，但把票号记下来',
+            sub: '手段 +3 · 危机 +3',
+            mark: 'lu_deal',
+            effect: () => applyMods({ scheme: 3, risk: 3 }),
+            log: '你兑了票子，把票号抄在手心。陆知微没有问你为什么记得这么快。'
+          },
+          {
+            label: '拒绝，让他自己走',
+            sub: '清誉 +3',
+            mark: 'lu_refuse',
+            effect: () => applyMods({ reputation: 3 }),
+            log: '陆知微收回牌票，看了你一会儿：“你比你姐姐硬。”'
+          }
+        ]
+      },
+      {
+        stage: 4,
+        kicker: '人情 · 陆知微',
+        title: '刑部封条',
+        body: [
+          '陆知微把一张刑部封条放在桌上。封条背面，已经盖好了印。',
+          '“三司会审那日，曹家仓会被封。你只有半个时辰，把你要的东西带出来。”',
+          '“用不用，随你。用了，我就回不了头。”'
+        ],
+        choices: [
+          {
+            label: '收下封条，记他这一份人情',
+            sub: '手段 +2 · 危机 +2',
+            mark: 'lu_seal',
+            effect: () => applyMods({ scheme: 2, risk: 2 }),
+            log: '你把封条折好，放进内袋。陆知微没有再说话。'
+          },
+          {
+            label: '把封条推回去，不连累他',
+            sub: '清誉 +2 · 信任 +2',
+            mark: 'lu_distance',
+            effect: () => applyMods({ reputation: 2, trust: 2 }),
+            log: '陆知微收起封条，轻轻敲了敲桌面：“好。”'
+          }
+        ]
+      }
+    ],
+    zhou: [
+      {
+        stage: 2,
+        kicker: '人情 · 老周',
+        title: '他女儿要赎身',
+        body: [
+          '老周在狱门外蹲着，手里攥着一张赎身契。',
+          '“我女儿在曹府做针线，管事说要五十两才放人。”',
+          '“我这条老命不值钱。可她就快被卖到通州去了。”'
+        ],
+        choices: [
+          {
+            label: '给他出主意，让他去找顾清和',
+            sub: '人望 +2 · 心情 +2',
+            mark: 'zhou_message',
+            effect: () => applyMods({ popularity: 2, mood: 2 }),
+            log: '老周听完，把赎身契叠好，朝值房的方向去了。'
+          },
+          {
+            label: '让他用狱门钥匙换一笔钱',
+            sub: '手段 +2 · 危机 +2',
+            mark: 'zhou_key_ask',
+            effect: () => applyMods({ scheme: 2, risk: 2 }),
+            log: '老周看了你很久，最后把钥匙放在你脚边，没有说话。'
+          },
+          {
+            label: '你帮不了，转身走',
+            sub: '心情 −3',
+            mark: 'zhou_ignore',
+            effect: () => applyMods({ mood: -3 }),
+            log: '你走出很远，还听见老周在身后咳嗽。'
+          }
+        ]
+      },
+      {
+        stage: 4,
+        kicker: '人情 · 老周',
+        title: '狱门钥匙',
+        body: [
+          '老周把一把铜钥匙放在你手里，钥匙上还带着他的体温。',
+          '“三更换班，有一刻钟没人。你姐姐在丙字号。”',
+          '“你带她走，我就当没看见。你不带，也别把钥匙还给别人。”'
+        ],
+        choices: [
+          {
+            label: '收下钥匙，答应带姐姐走',
+            sub: '危机 +4 · 心情 +3',
+            mark: 'zhou_key',
+            effect: () => applyMods({ risk: 4, mood: 3 }),
+            log: '你把钥匙贴身收好。老周转过身，继续扫他的地。'
+          },
+          {
+            label: '把钥匙还回去，走正经路',
+            sub: '清誉 +2 · 信任 +2',
+            mark: 'zhou_refuse',
+            effect: () => applyMods({ reputation: 2, trust: 2 }),
+            log: '老周接过钥匙，叹了口气：“你姐姐也是这个脾气。”'
+          }
+        ]
+      }
+    ]
+  };
+
+  function addMark(mark) {
+    if (!state || !mark) return;
+    if (!Array.isArray(state.marks)) state.marks = [];
+    if (!state.marks.includes(mark)) state.marks.push(mark);
+  }
+
+  function hasMark(mark) {
+    return !!(state && Array.isArray(state.marks) && state.marks.includes(mark));
+  }
+
+  function bondStance(key) {
+    const level = state && state.relations ? state.relations[key] || 0 : 0;
+    if (level >= 4) return 'ally';
+    if (level <= 1) return 'cold';
+    return 'neutral';
+  }
+
+  function bondStanceLabel(key) {
+    const stance = bondStance(key);
+    if (stance === 'ally') return '可托付';
+    if (stance === 'cold') return '不交心';
+    return '能共事';
+  }
+
+  function bondStanceLine(key) {
+    const name = SOCIALS[key].name;
+    const stance = bondStance(key);
+    if (stance === 'ally') {
+      if (key === 'gu') return '顾清和把她的印信放在你这一边。';
+      if (key === 'pei') return '裴小满站在堂外，手里攥着那本旧簿。';
+      if (key === 'lu') return '陆知微坐在旁听席，封条已经盖好。';
+      return '老周守在角门，钥匙在他袖子里。';
+    }
+    if (stance === 'cold') {
+      if (key === 'gu') return '顾清和没有看你。她的印信收在袖中。';
+      if (key === 'pei') return '裴小满站得很远，不敢抬头。';
+      if (key === 'lu') return '陆知微没有来。刑部的位置空着。';
+      return '老周背过身去，继续扫他的地。';
+    }
+    if (key === 'gu') return '顾清和坐在上首，既没有帮你，也没有拦你。';
+    if (key === 'pei') return '裴小满站在人群里，手指绞着衣角。';
+    if (key === 'lu') return '陆知微来了，但只带了眼睛，没有带封条。';
+    return '老周在门外守着，偶尔往里看一眼。';
+  }
+
+  function pendingBondArc() {
+    if (!state || state.ended) return null;
+    for (const key of ['gu', 'pei', 'lu', 'zhou']) {
+      const level = state.relations[key] || 0;
+      for (const arc of BOND_ARCS[key]) {
+        const flag = 'arc_' + key + '_' + arc.stage;
+        if (level >= arc.stage && !state.flags[flag]) return { key, arc };
+      }
+    }
+    return null;
+  }
+
+  function showBondArc(key, arc) {
+    if (!state) return;
+    state.flags['arc_' + key + '_' + arc.stage] = true;
+    queueModal({
+      kicker: arc.kicker,
+      title: arc.title,
+      body: arc.body,
+      note: '这段人情，只会走到这里一次。',
+      choices: arc.choices.map((choice) => ({
+        label: choice.label,
+        sub: choice.sub,
+        action: () => {
+          addMark(choice.mark);
+          choice.effect();
+          addLog(choice.log, '');
+          save();
+          render();
+        }
+      }))
+    });
+  }
 
   const WORK_LINES = [
     [
@@ -1863,6 +2519,406 @@ button:focus-visible,
     }
   };
 
+
+  const SPECIALTIES = {
+    law: {
+      id: 'law',
+      name: '律例',
+      tag: '庭审',
+      short: '呈证线索 +1，清誉门槛升到 60',
+      desc: '你把《大胤律》和刑案则例翻到卷边。别人看证据，你先看程序。',
+      passive: '呈证时有效线索 +1；当堂清誉要求提高到 60。',
+      clue: 'time',
+      shortcut: '从提审簿里挑出程序漏洞',
+      shortcutSub: '直接调出「提审时辰」，不占常规查档资格。',
+      feat: '当堂引律',
+      featDesc: '清誉 +8、危机 −5、信任 +2。',
+      featLog: '你把《刑案则例》翻到“提审无狱门押记”一条，指给顾清和看。她看了很久，说：“你姐姐当年也背过这一条。”'
+    },
+    math: {
+      id: 'math',
+      name: '算学',
+      tag: '账目',
+      short: '账目疲劳 −4，双账齐备再 +1',
+      desc: '你对数字有近乎固执的敏感。账上多一笔、少一笔，你都看得出来。',
+      passive: '查军粮册、汇通号票根疲劳 −4；两份都查得时，呈证有效线索 +1。',
+      clue: 'ledger',
+      shortcut: '用旧例反推损耗',
+      shortcutSub: '直接调出「军粮损耗」，不占常规查档资格。',
+      feat: '连夜核账',
+      featDesc: '补一份账目线索；两账齐全时改得现银 +8、才学 +2。',
+      featLog: '你把两本账铺在地上，一笔一笔对到天亮。最后一页合上时，窗外已经开始扫雪。'
+    },
+    docs: {
+      id: 'docs',
+      name: '文牍',
+      tag: '档案',
+      short: '查档疲劳 −3，学艺才学 +2',
+      desc: '你熟悉每一类卷宗的折角、编号和归档习惯。旧档在你手里，会自己说话。',
+      passive: '查档疲劳 −3；学艺才学 +2。',
+      clue: 'letter',
+      shortcut: '从《河工志》夹层里找',
+      shortcutSub: '直接调出「旧档夹页」，不占常规查档资格。',
+      feat: '调包一卷旧档',
+      featDesc: '补一份档案线索；档案齐全时才学 +4。',
+      featLog: '你借整理旧档的名义，把最里面那排柜子重新编了号。守库的老吏没有发现。'
+    },
+    human: {
+      id: 'human',
+      name: '人情',
+      tag: '关系',
+      short: '走动只花 1 两，代奏信任降到 50',
+      desc: '你记得每个人怕什么、欠什么、想要什么。人情不是软东西，是硬通货。',
+      passive: '走动只花 1 两，人望额外 +2；请顾清和代奏的信任要求降到 50。',
+      clue: 'witness',
+      shortcut: '托老周递一句话',
+      shortcutSub: '直接调出「通州车马」，不占常规查档资格。',
+      feat: '请顾清和吃茶',
+      featDesc: '信任 +10、顾清和关系 +1、银 −3、心情 +5。',
+      featLog: '你在值房后的小茶间摆了两只粗盏。顾清和喝了一口，说：“你姐姐也这样，先给人倒茶，再问人要命。”'
+    },
+    verify: {
+      id: 'verify',
+      name: '验伪',
+      tag: '识破',
+      short: '伪造成功率八成，危机上限 90',
+      desc: '你看纸、看墨、看印。真假在你眼里，常常只差一道水印。',
+      passive: '伪造手令成功率提高到八成；呈证危机上限放宽到 90。',
+      clue: 'script',
+      shortcut: '对着灯验一遍罪籍',
+      shortcutSub: '直接调出「罪籍画押」，不占常规查档资格。',
+      feat: '验出伪印',
+      featDesc: '危机 −10、清誉 +6、手段 +3；若已伪造手令，额外危机 −5。',
+      featLog: '你把罪籍举到灯下。纸背的水印、印泥的浮色、画押的断笔，一层一层分开。你第一次确定：这不是姐姐的手。'
+    }
+  };
+
+  const STORY_BEATS = {
+    7: {
+      kicker: '第 7 日 · 值房',
+      title: '顾清和把茶盏扣在案上',
+      body: [
+        '第七日，顾清和第一次关上门。',
+        '“你查提审簿，查军粮册，查汇通号。沈青梧，你是在查案，还是在找死？”',
+        '她把一张调令推过来。“签了它，去通州盘仓。三个月后回来，你姐姐的案子已经结了。”'
+      ],
+      choices: [
+        {
+          label: '不签。继续查。',
+          mark: 'refuse_transfer',
+          sub: '危机 +6 · 信任 −2 · 心情 +3',
+          effect: () => applyMods({ risk: 6, trust: -2, mood: 3 }),
+          log: '你把调令推回去。顾清和看了你很久，最后说：“你姐姐也是这个脾气。”',
+          type: 'danger'
+        },
+        {
+          label: '签，但把调令抄一份留底',
+          mark: 'kept_copy',
+          sub: '信任 +3 · 手段 +3 · 危机 +2',
+          effect: () => applyMods({ trust: 3, scheme: 3, risk: 2 }),
+          log: '你签了字，又把调令抄了一份藏在鞋底。顾清和看见了，没有说破。',
+          type: ''
+        },
+        {
+          label: '问她：当年为什么保姐姐？',
+          sub: '信任 +2 · 心情 −4 · 知道一件旧事',
+          effect: () => applyMods({ trust: 2, mood: -4 }),
+          log: '顾清和没有回答。她只说：“你姐姐当年也问过我同样的话。”',
+          type: ''
+        }
+      ]
+    },
+    14: {
+      kicker: '第 14 日 · 狱门',
+      title: '姐姐从狱里递出一封信',
+      body: [
+        '第十四日，老周把一团湿纸塞进你手里。纸上是姐姐的字，写得很急。',
+        '“粮在曹家仓。郑铨分三成。别来找我，也别信顾清和。”',
+        '纸团最下面还有一行小字：“青梧，饭要好好吃。”'
+      ],
+      choices: [
+        {
+          label: '按信里说的，去查曹家仓',
+          mark: 'raided_cang',
+          sub: '获得线索「军粮损耗」· 危机 +6',
+          effect: () => {
+            addClue('ledger');
+            applyMods({ risk: 6 });
+          },
+          log: '你按信里的仓号摸到曹家仓外。仓门锁着，但门缝里漏出新米的气味。',
+          type: 'danger'
+        },
+        {
+          label: '把信烧了，不连累老周',
+          mark: 'burned_letter',
+          sub: '心情 +4 · 清誉 +2 · 危机 −4',
+          effect: () => applyMods({ mood: 4, reputation: 2, risk: -4 }),
+          log: '你把信凑到灯上。火烧到“饭要好好吃”那一行时，你把它按灭了。',
+          type: ''
+        },
+        {
+          label: '把信交给顾清和',
+          mark: 'gave_letter',
+          sub: '信任 +5 · 危机 +3 · 清誉 −2',
+          effect: () => applyMods({ trust: 5, risk: 3, reputation: -2 }),
+          log: '顾清和看完信，折好，放进袖中。“这封信，你没有看过。”',
+          type: ''
+        }
+      ]
+    },
+    21: {
+      kicker: '第 21 日 · 廊下',
+      title: '郑铨在廊下等你',
+      body: [
+        '第二十一日，郑铨站在典簿司廊下，像在等一个迟到的下属。',
+        '“沈掌事，你姐姐的案子，我可以让它翻，也可以让它永远翻不了。”',
+        '他推来一张银票。“你查你的，我保我的。到了堂上，你知道该说什么。”'
+      ],
+      choices: [
+        {
+          label: '收下银票，假装合作',
+          mark: 'took_bribe',
+          sub: '银 +12 · 危机 +8 · 手段 +4',
+          effect: () => applyMods({ silver: 12, risk: 8, scheme: 4 }),
+          log: '你把银票收进袖中。郑铨笑了一下，替你掸了掸肩上的灰。',
+          type: 'danger'
+        },
+        {
+          label: '把银票推回去',
+          mark: 'refused_bribe',
+          sub: '清誉 +4 · 危机 +4 · 信任 +2',
+          effect: () => applyMods({ reputation: 4, risk: 4, trust: 2 }),
+          log: '银票落在两人之间的地上。郑铨没有捡，只说了句：“可惜。”',
+          type: ''
+        },
+        {
+          label: '收下，但把票号记下来',
+          mark: 'kept_ticket',
+          sub: '银 +12 · 危机 +5 · 获得线索「汇通号」',
+          effect: () => {
+            applyMods({ silver: 12, risk: 5, scheme: 2 });
+            addClue('silver');
+          },
+          log: '你收下银票，转头把票号抄进手心。汇通号的朱印，和军粮款是同一批。',
+          type: 'danger'
+        }
+      ]
+    },
+    28: {
+      kicker: '第 28 日 · 档案库',
+      title: '档案库最后一夜',
+      body: [
+        '第二十八日，档案库最里面那箱《河工志》不见了。',
+        '守库的老吏说，昨夜里有人来搬过，拿着掌司的条子。',
+        '你只有一晚。明日之后，所有卷宗都会被封进刑部大堂。'
+      ],
+      choices: [
+        {
+          label: '翻窗进库，自己找',
+          mark: 'broke_in',
+          sub: '危机 +12 · 疲劳 +10 · 补一份缺失线索',
+          effect: () => {
+            applyMods({ risk: 12, fatigue: 10 });
+            if (!state.clues.letter) addClue('letter');
+            else if (!state.clues.ledger) addClue('ledger');
+            else if (!state.clues.silver) addClue('silver');
+            else applyMods({ talent: 4 });
+          },
+          log: '你从气窗翻进库房，在积灰的柜底摸到一只油纸包。手指被木刺扎出了血。',
+          type: 'danger'
+        },
+        {
+          label: '去求顾清和开库',
+          mark: 'trusted_gu',
+          sub: '信任 ≥55 时获得「旧档夹页」；否则信任 −4、危机 +4',
+          effect: () => {
+            if (state.stats.trust >= 55) {
+              addClue('letter');
+              applyMods({ trust: 4 });
+            } else {
+              applyMods({ trust: -4, risk: 4 });
+            }
+          },
+          log: '顾清和听完，只问了一句：“你想清楚了？”她把钥匙放在桌上，又收了回去。',
+          type: ''
+        },
+        {
+          label: '不冒险，回去整理已有证据',
+          mark: 'built_case',
+          sub: '清誉 +4 · 疲劳 −8 · 危机 −3',
+          effect: () => applyMods({ reputation: 4, fatigue: -8, risk: -3 }),
+          log: '你把已有的卷宗按时间排了一遍，给每一份都写了来源和疑点。今夜不再出门。',
+          type: ''
+        }
+      ]
+    }
+  };
+
+
+  const FESTIVALS = {
+    6: {
+      round: 1,
+      name: '河灯节',
+      kicker: '第一大轮 · 河灯节',
+      title: '河灯节，值房不能空',
+      body: [
+        '下元将近。宫里提前在御河放灯，水面漂着几百盏小灯。',
+        '典簿司要留一个人值夜。顾清和把值夜册推到你面前，没有抬头。',
+        '狱里不过节。你姐姐那边，连一盏灯也没有。'
+      ],
+      note: '每一大轮一次。选完后，这一日仍可正常行动。',
+      choices: [
+        {
+          label: '替顾清和值夜',
+          sub: '疲劳 +12 · 银 +3 · 心情 −4 · 信任 +3',
+          mods: { fatigue: 12, silver: 3, mood: -4, trust: 3 },
+          log: '你把顾清和的名字从值夜册上划掉，换成自己的。她看了你一眼，把河灯钱留在桌上。'
+        },
+        {
+          label: '买一盏灯，托老周送进狱',
+          sub: '疲劳 +4 · 银 −4 · 心情 +12 · 老周 +1',
+          mods: { fatigue: 4, silver: -4, mood: 12, rel: { zhou: 1 } },
+          log: '你买了一盏最小的河灯，托老周带进去。灯面上只写了两个字：平安。'
+        },
+        {
+          label: '留在值房补卷宗',
+          sub: '疲劳 +6 · 银 +2 · 心情 +2 · 才学 +2',
+          mods: { fatigue: 6, silver: 2, mood: 2, talent: 2 },
+          log: '你把灯钱省下来，听着远处的河灯一盏盏漂过去。值房里只剩翻纸的声音。'
+        }
+      ]
+    },
+    12: {
+      round: 2,
+      name: '谢冬宴',
+      kicker: '第二大轮 · 谢冬宴',
+      title: '谢冬宴上，缺一个端汤的人',
+      body: [
+        '宫里办谢冬宴，御膳房临时缺人。顾清和要去赴宴，问你要不要跟着。',
+        '她说：“端汤的时候，能看清谁先动筷，谁先离席。”',
+        '也有人说，这种宴席上，丫鬟比主子更容易被人记住。'
+      ],
+      note: '每一大轮一次。宴席上的位置，会决定你今晚听见什么。',
+      choices: [
+        {
+          label: '去御膳房帮厨',
+          sub: '疲劳 +14 · 银 +5 · 心情 −6 · 信任 +2',
+          mods: { fatigue: 14, silver: 5, mood: -6, trust: 2 },
+          log: '你在御膳房站了一夜，端出去三十六道菜。赏钱是五两，烫伤在手腕上。'
+        },
+        {
+          label: '跟顾清和赴宴，认人',
+          sub: '疲劳 +6 · 银 −2 · 心情 +8 · 人望 +4 · 清誉 +2',
+          mods: { fatigue: 6, silver: -2, mood: 8, popularity: 4, reputation: 2 },
+          log: '你换了一身干净衣裳，跟在顾清和身后。席上的人看你的眼神，比看菜多。'
+        },
+        {
+          label: '称病，留在值房',
+          sub: '疲劳 +2 · 银 0 · 心情 −2 · 才学 +2 · 危机 +2',
+          mods: { fatigue: 2, mood: -2, talent: 2, risk: 2 },
+          log: '你推说头疼，留在值房抄了一夜旧档。第二天，宴上的事已经传成了三个版本。'
+        }
+      ]
+    },
+    18: {
+      round: 3,
+      name: '尝新礼',
+      kicker: '第三大轮 · 尝新礼',
+      title: '新米进宫，先给谁一碗',
+      body: [
+        '各府送新米进宫，今日行尝新礼。下房的人一年到头吃陈米。',
+        '你手里有一小袋新米，是膳房分剩下的。',
+        '姐姐在狱里，应该也很久没闻过新米的味道了。'
+      ],
+      note: '每一大轮一次。米只有一袋，给谁都要想清楚。',
+      choices: [
+        {
+          label: '分给下房的人',
+          sub: '疲劳 +4 · 银 −3 · 心情 +8 · 人望 +4',
+          mods: { fatigue: 4, silver: -3, mood: 8, popularity: 4 },
+          log: '你把新米煮成一大锅粥，下房的人排着队来盛。有人叫你“沈姑娘”，不是“那个抄书的”。'
+        },
+        {
+          label: '给姐姐留一碗，托老周送去',
+          sub: '疲劳 +5 · 银 −2 · 心情 +10 · 老周 +1',
+          mods: { fatigue: 5, silver: -2, mood: 10, rel: { zhou: 1 } },
+          log: '你把新米粥装进一只旧瓦罐，托老周带进狱。罐子回来时，底下压着一根头发。'
+        },
+        {
+          label: '把新米换成银钱',
+          sub: '疲劳 +4 · 银 +6 · 心情 −6 · 清誉 −3',
+          mods: { fatigue: 4, silver: 6, mood: -6, reputation: -3 },
+          log: '你把新米卖给宫外的粮铺，换回六两碎银。下房的人没有问，你也没有说。'
+        }
+      ]
+    },
+    24: {
+      round: 4,
+      name: '祭仓',
+      kicker: '第四大轮 · 祭仓',
+      title: '祭仓日，仓门不能开',
+      body: [
+        '祭仓日，曹家仓按例封门。老周说，仓底还有一批没入账的米。',
+        '“你要看，今晚是唯一的机会。你要是不看，明天就说不清了。”',
+        '仓门外，祭仓的香已经点上了。'
+      ],
+      note: '每一大轮一次。开仓会留下痕迹。',
+      choices: [
+        {
+          label: '替老周守仓',
+          sub: '疲劳 +12 · 银 +4 · 心情 −2 · 老周 +2 · 危机 +3',
+          mods: { fatigue: 12, silver: 4, mood: -2, risk: 3, rel: { zhou: 2 } },
+          log: '你在仓门外守到天亮，替他挡了两拨来查问的人。老周把一壶酒放在你脚边，什么也没说。'
+        },
+        {
+          label: '按规矩封仓，不让人进',
+          sub: '疲劳 +5 · 银 0 · 心情 −2 · 清誉 +3 · 危机 −2',
+          mods: { fatigue: 5, mood: -2, reputation: 3, risk: -2 },
+          log: '你亲手贴上封条，把仓门锁死。老周看了你很久，最后说：“也好。”'
+        },
+        {
+          label: '夜里开仓，查仓底',
+          sub: '疲劳 +10 · 银 −1 · 心情 −2 · 危机 +6 · 才学 +2',
+          mods: { fatigue: 10, silver: -1, mood: -2, risk: 6, talent: 2 },
+          log: '你借着一盏小灯摸进仓底。米袋下面压着一本没有封皮的旧账，墨迹还是新的。'
+        }
+      ]
+    },
+    29: {
+      round: 5,
+      name: '守冬',
+      kicker: '第五大轮 · 守冬',
+      title: '守冬夜，狱门也开着',
+      body: [
+        '明日三司会审。今夜宫中守冬，典簿司却要留人。',
+        '老周说，狱门今晚可以多开一刻。',
+        '顾清和没有问你今晚去哪。她只把一盏灯放在你案上。'
+      ],
+      note: '每一大轮一次。今夜之后，就是最后一日。',
+      choices: [
+        {
+          label: '留下值夜',
+          sub: '疲劳 +15 · 银 +5 · 心情 −5 · 信任 +3',
+          mods: { fatigue: 15, silver: 5, mood: -5, trust: 3 },
+          log: '你在值房守到天亮，把明日的卷宗又理了一遍。灯油烧干了，灯芯还亮着。'
+        },
+        {
+          label: '去宫宴露脸',
+          sub: '疲劳 +8 · 银 −5 · 心情 +10 · 人望 +5 · 清誉 +3',
+          mods: { fatigue: 8, silver: -5, mood: 10, popularity: 5, reputation: 3 },
+          log: '你换上最好的一身衣裳，在宫宴上露了一面。有人记住了你的脸，也有人记住了你站在谁身后。'
+        },
+        {
+          label: '去狱外看姐姐',
+          sub: '疲劳 +10 · 银 −3 · 心情 +15 · 危机 +4',
+          mods: { fatigue: 10, silver: -3, mood: 15, risk: 4 },
+          mark: 'saw_sister',
+          log: '你隔着狱门看了她一眼。她没有说话，只把手贴在木栏上。你把那盏灯留在门外。'
+        }
+      ]
+    }
+  };
+
   let state = null;
   let gameScreen = 'start';
   let modalQueue = [];
@@ -1895,6 +2951,9 @@ button:focus-visible,
       day: 1,
       rank: 0,
       silver: 20,
+      specialization: null,
+      specUses: { shortcut: false, feat: false },
+      marks: [],
       stats: {
         talent: 22,
         popularity: 12,
@@ -1919,7 +2978,16 @@ button:focus-visible,
         forged: false,
         warned: false,
         metZheng: false,
-        finalChoice: ''
+        finalChoice: '',
+        beat7: false,
+        beat14: false,
+        beat21: false,
+        beat28: false,
+        festival6: false,
+        festival12: false,
+        festival18: false,
+        festival24: false,
+        festival29: false
       },
       seenEvents: [],
       log: [],
@@ -1966,6 +3034,187 @@ button:focus-visible,
     return true;
   }
 
+  function specialization() {
+    return state && state.specialization ? SPECIALTIES[state.specialization] || null : null;
+  }
+
+  function effectiveClues() {
+    if (!state) return 0;
+    let n = clueCount() + (state.flags.forged ? 1 : 0);
+    if (state.specialization === 'law' && clueCount() > 0) n += 1;
+    if (state.specialization === 'math' && state.clues.ledger && state.clues.silver) n += 1;
+    return n;
+  }
+
+  function exposeReqs() {
+    const spec = state ? state.specialization : null;
+    return {
+      reputation: spec === 'law' ? 60 : 50,
+      trust: spec === 'human' ? 50 : 60,
+      risk: spec === 'verify' ? 90 : 85
+    };
+  }
+
+  function archiveFatigue(a) {
+    let fatigue = a.fatigue;
+    if (state && state.specialization === 'docs') fatigue -= 3;
+    if (state && state.specialization === 'math' && (a.id === 'ledger' || a.id === 'silver')) fatigue -= 4;
+    return Math.max(4, fatigue);
+  }
+
+  function socialCost() {
+    return state && state.specialization === 'human' ? 1 : 2;
+  }
+
+  function forgeChance() {
+    return state && state.specialization === 'verify' ? 0.8 : 0.5;
+  }
+
+  function queueSpecialtyChoice() {
+    if (!state || state.ended || state.specialization) return;
+    queueModal({
+      kicker: '开局 · 选择专精',
+      title: '你靠什么翻案？',
+      body: [
+        '三十天不够你什么都学。你只能选一门，把它学到能救命。',
+        '专精决定你的查档捷径、一次性绝活，以及最后一日怎么过。选定后不可更改。'
+      ],
+      note: '选定后，顶栏会显示专精徽记；点它可查看说明与绝活。',
+      choices: Object.keys(SPECIALTIES).map((id) => {
+        const s = SPECIALTIES[id];
+        return {
+          label: `${s.name} · ${s.tag}`,
+          sub: `${s.short} · 捷径：${CLUES[s.clue].label} · 绝活：${s.feat}`,
+          action: () => chooseSpecialty(id)
+        };
+      })
+    });
+  }
+
+  function chooseSpecialty(id) {
+    const s = SPECIALTIES[id];
+    if (!s || !state) return;
+    state.specialization = id;
+    state.specUses = { shortcut: false, feat: false };
+    addLog(`你选定专精：${s.name}。${s.passive}`, 'rank');
+    save();
+    render();
+    showToast(`专精已定：${s.name}`);
+  }
+
+  function showSpecialtyModal() {
+    if (!state || state.ended) return;
+    if (!state.specialization) {
+      queueSpecialtyChoice();
+      return;
+    }
+    const s = SPECIALTIES[state.specialization];
+    const used = state.specUses.feat;
+    queueModal({
+      kicker: `专精 · ${s.tag}`,
+      title: s.name,
+      body: [
+        s.desc,
+        `被动：${s.passive}`,
+        `查档捷径：${s.shortcut}（${state.specUses.shortcut ? '已用' : '未用'}）`
+      ],
+      note: '绝活每次游戏只能用一次，会消耗一日。',
+      choices: [
+        {
+          label: `用绝活 · ${s.feat}`,
+          sub: s.featDesc + (used ? ' · 已用过' : ''),
+          disabled: used,
+          action: () => useSpecialtyFeat()
+        },
+        { label: '合上' }
+      ]
+    });
+  }
+
+  function useSpecialtyFeat() {
+    if (!state || state.ended || !state.specialization) return;
+    if (state.specUses.feat) {
+      showToast('这门绝活已经用过了。');
+      return;
+    }
+    const s = SPECIALTIES[state.specialization];
+    state.specUses.feat = true;
+    switch (state.specialization) {
+      case 'law':
+        applyMods({ reputation: 8, risk: -5, trust: 2 });
+        break;
+      case 'math':
+        if (!state.clues.ledger) addClue('ledger');
+        else if (!state.clues.silver) addClue('silver');
+        else applyMods({ silver: 8, talent: 2 });
+        applyMods({ fatigue: 6 });
+        break;
+      case 'docs':
+        if (!state.clues.letter) addClue('letter');
+        else if (!state.clues.script) addClue('script');
+        else applyMods({ talent: 4 });
+        applyMods({ fatigue: 4 });
+        break;
+      case 'human':
+        applyMods({ trust: 10, silver: -3, mood: 5, rel: { gu: 1 } });
+        break;
+      case 'verify':
+        applyMods({ risk: -10, reputation: 6, scheme: 3 });
+        if (state.flags.forged) applyMods({ risk: -5 });
+        break;
+    }
+    addLog(s.featLog, 'rank');
+    save();
+    render();
+    advance();
+  }
+
+  function showBeat(day) {
+    const beat = STORY_BEATS[day];
+    if (!beat || !state) return;
+    state.flags['beat' + day] = true;
+    queueModal({
+      kicker: beat.kicker,
+      title: beat.title,
+      body: beat.body,
+      note: '这件事不会再来一次。',
+      choices: beat.choices.map((choice) => ({
+        label: choice.label,
+        sub: choice.sub,
+        action: () => {
+          addMark(choice.mark);
+          choice.effect();
+          addLog(choice.log, choice.type || '');
+          save();
+          render();
+        }
+      }))
+    });
+  }
+
+  function showFestival(day) {
+    const f = FESTIVALS[day];
+    if (!f || !state) return;
+    queueModal({
+      kicker: f.kicker,
+      title: f.title,
+      body: f.body,
+      note: f.note,
+      choices: f.choices.map((choice) => ({
+        label: choice.label,
+        sub: choice.sub,
+        action: () => {
+          if (choice.mark) addMark(choice.mark);
+          applyMods(choice.mods);
+          addLog(choice.log, 'festival');
+          state.flags['festival' + day] = true;
+          save();
+          render();
+        }
+      }))
+    });
+  }
+
   function efficiency() {
     if (!state) return 1;
     let e = 1;
@@ -1979,7 +3228,9 @@ button:focus-visible,
   }
 
   function studyTalentGain() {
-    return Math.max(2, Math.round((5 + (state.stats.mood >= 60 ? 1 : 0)) * efficiency()));
+    let gain = Math.max(2, Math.round((5 + (state.stats.mood >= 60 ? 1 : 0)) * efficiency()));
+    if (state.specialization === 'docs') gain += 2;
+    return gain;
   }
 
   /* ---------------- 存档 ---------------- */
@@ -2009,6 +3260,8 @@ button:focus-visible,
         stats: Object.assign({}, base.stats, data.stats || {}),
         clues: Object.assign({}, base.clues, data.clues || {}),
         relations: Object.assign({}, base.relations, data.relations || {}),
+        specUses: Object.assign({}, base.specUses, data.specUses || {}),
+        marks: Array.isArray(data.marks) ? data.marks.filter((m) => typeof m === 'string') : [],
         flags: Object.assign({}, base.flags, data.flags || {}),
         seenEvents: Array.isArray(data.seenEvents) ? data.seenEvents : [],
         log: Array.isArray(data.log) ? data.log : []
@@ -2028,6 +3281,73 @@ button:focus-visible,
     } catch (e) {
       /* ignore */
     }
+  }
+
+  function clearPreFinale() {
+    try {
+      localStorage.removeItem(PRE_FINALE_KEY);
+    } catch (e) {
+      /* ignore */
+    }
+  }
+
+  function savePreFinale() {
+    if (!state) return;
+    try {
+      const snapshot = JSON.parse(JSON.stringify(state));
+      snapshot.ended = false;
+      snapshot.ending = null;
+      snapshot.flags = Object.assign({}, snapshot.flags, { preFinaleSaved: true });
+      localStorage.setItem(PRE_FINALE_KEY, JSON.stringify({
+        version: 1,
+        savedAt: Date.now(),
+        state: snapshot
+      }));
+    } catch (e) {
+      /* 隐私模式下忽略 */
+    }
+  }
+
+  function readPreFinale() {
+    try {
+      const raw = localStorage.getItem(PRE_FINALE_KEY);
+      if (!raw) return null;
+      const payload = JSON.parse(raw);
+      const data = payload && payload.state ? payload.state : payload;
+      if (!data || !data.stats) return null;
+      const base = newGame(data.name);
+      const merged = Object.assign({}, base, data, {
+        stats: Object.assign({}, base.stats, data.stats || {}),
+        clues: Object.assign({}, base.clues, data.clues || {}),
+        relations: Object.assign({}, base.relations, data.relations || {}),
+        specUses: Object.assign({}, base.specUses, data.specUses || {}),
+        marks: Array.isArray(data.marks) ? data.marks.filter((m) => typeof m === 'string') : [],
+        flags: Object.assign({}, base.flags, data.flags || {}),
+        seenEvents: Array.isArray(data.seenEvents) ? data.seenEvents : [],
+        log: Array.isArray(data.log) ? data.log : []
+      });
+      merged.day = MAX_DAY;
+      merged.rank = clamp(Number(merged.rank) || 0, 0, RANKS.length - 1);
+      merged.ended = false;
+      merged.ending = null;
+      return merged;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function returnToPreFinale() {
+    const snapshot = readPreFinale();
+    if (!snapshot) {
+      showToast('没有找到终局前的存档。');
+      return;
+    }
+    state = snapshot;
+    gameScreen = 'game';
+    clearModal();
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    showToast('回到了终局前，可以重新选择。');
   }
 
   function getGallery() {
@@ -2085,13 +3405,16 @@ button:focus-visible,
       .map((p) => '<p>' + p + '</p>')
       .join('');
     const choices = modal.choices && modal.choices.length ? modal.choices : [{ label: '合上' }];
+    const isDense = choices.length >= 6;
+    const denseChoices = isDense ? ' dense' : '';
+    const cardClass = isDense ? 'modal-card dense-card' : 'modal-card';
     root.innerHTML = `
-      <div class="modal-card" role="dialog" aria-modal="true" aria-label="${escapeHtml(modal.title || '')}">
+      <div class="${cardClass}" role="dialog" aria-modal="true" aria-label="${escapeHtml(modal.title || '')}">
         <div class="modal-kicker">${escapeHtml(modal.kicker || '值房夜话')}</div>
         <h2>${escapeHtml(modal.title || '')}</h2>
         ${bodyHtml}
         ${modal.note ? `<div class="modal-note">${modal.note}</div>` : ''}
-        <div class="modal-choices"></div>
+        <div class="modal-choices${denseChoices}"></div>
       </div>
     `;
     const box = root.querySelector('.modal-choices');
@@ -2115,6 +3438,17 @@ button:focus-visible,
     });
     root.classList.add('open');
     document.body.style.overflow = 'hidden';
+    const toastEl = $toast();
+    if (toastEl) toastEl.classList.remove('show');
+    requestAnimationFrame(() => {
+      const card = root.querySelector('.modal-card');
+      if (card && card.scrollHeight > card.clientHeight + 2) {
+        const cue = document.createElement('div');
+        cue.className = 'modal-scroll-cue';
+        cue.textContent = '内容较长 · 向下滚动查看全部选项';
+        card.insertBefore(cue, root.querySelector('.modal-choices'));
+      }
+    });
   }
 
   function closeModal(callback) {
@@ -2183,6 +3517,7 @@ button:focus-visible,
             <h2>你只有三十天。</h2>
             <p>查清军粮案，救出姐姐。或者，替她死。</p>
             <p>每天只能做一件事。当值、查档、学艺、走动、布局、歇息。每一个选择都会留下痕迹。</p>
+            <p class="start-note">开局先选一门专精，决定你的查档捷径、一次性绝活和终局判定。</p>
             <label class="name-field">
               <span>你的名字</span>
               <input id="player-name" maxlength="8" value="${showContinue ? escapeHtml(saved.name) : '沈青梧'}" autocomplete="off" spellcheck="false">
@@ -2223,6 +3558,201 @@ button:focus-visible,
     return html;
   }
 
+  function examRow(label, value, need, invert = false) {
+    const ok = invert ? value <= need : value >= need;
+    return `<div class="exam-row ${ok ? 'ok' : 'bad'}">
+      <span>${label}</span>
+      <b>${value}<small> / ${need}</small></b>
+      <em>${ok ? '✓' : '✗'}</em>
+    </div>`;
+  }
+
+  function examPlan() {
+    const c = clueCount();
+    if (state.rank === 0) {
+      const missed = state.day > 11;
+      return {
+        title: `${missed ? '已错过' : '下次考功'} · 第 11 日`,
+        rows: [
+          examRow('信任', state.stats.trust, 25),
+          examRow('才学', state.stats.talent, 25),
+          examRow('线索', c, 1)
+        ].join(''),
+        note: missed ? '第 11 日考功已过，位分停留。' : '通过后：掌籍女史 · 月俸 8 两'
+      };
+    }
+    if (state.rank === 1) {
+      const missed = state.day > 21;
+      return {
+        title: `${missed ? '已错过' : '下次考功'} · 第 21 日`,
+        rows: [
+          examRow('信任', state.stats.trust, 45),
+          examRow('才学', state.stats.talent, 45),
+          examRow('人望', state.stats.popularity, 25),
+          examRow('线索', c, 3)
+        ].join(''),
+        note: missed ? '第 21 日考功已过，位分停留。' : '通过后：典簿司掌事 · 月俸 12 两'
+      };
+    }
+    const effective = effectiveClues();
+    const reqs = exposeReqs();
+    const pass = effective >= 5 && (state.stats.reputation >= reqs.reputation || state.stats.trust >= reqs.trust) && state.stats.risk < reqs.risk;
+    return {
+      title: '终考 · 第 30 日',
+      rows: [
+        examRow('有效线索', effective, 5),
+        examRow('清誉', state.stats.reputation, reqs.reputation),
+        examRow('代奏信任', state.stats.trust, reqs.trust),
+        examRow('危机（上限）', state.stats.risk, reqs.risk, true)
+      ].join(''),
+      note: pass ? '呈证条件已达成。' : `呈证还差条件：有效线索 ≥5，清誉 ≥${reqs.reputation} 或信任 ≥${reqs.trust}，危机 <${reqs.risk}。`
+    };
+  }
+
+  function endingReview(type) {
+    const c = clueCount();
+    const effective = effectiveClues();
+    const reqs = exposeReqs();
+    const rep = state.stats.reputation;
+    const trust = state.stats.trust;
+    const risk = state.stats.risk;
+    const fatigue = state.stats.fatigue;
+    const row = (label, value, ok) => `<span class="review-item ${ok === null ? '' : ok ? 'ok' : 'bad'}">${label}<b>${value}</b></span>`;
+    let rows = '';
+    let hint = '';
+    let cond = '';
+    if (type === 'clear_leave' || type === 'clear_stay') {
+      const expose = effective >= 5 && rep >= reqs.reputation && risk < reqs.risk;
+      const viaGu = effective >= 5 && trust >= reqs.trust;
+      rows = [
+        row('有效线索', `${effective} / 5`, effective >= 5),
+        row('当堂清誉', `${rep} / ${reqs.reputation}`, rep >= reqs.reputation),
+        row('代奏信任', `${trust} / ${reqs.trust}`, trust >= reqs.trust),
+        row('危机', `${risk} / ${reqs.risk}`, risk < reqs.risk),
+        row('呈证资格', (expose || viaGu) ? '达成' : '未达成', expose || viaGu)
+      ].join('');
+      cond = `有效线索 ≥5，且（清誉 ≥${reqs.reputation} 或信任 ≥${reqs.trust}），危机 <${reqs.risk}；在终局选择呈证或代奏。`;
+      hint = type === 'clear_stay'
+        ? '想换一条线，可以试试辞官带姐姐离开；或者继续留在宫里，看另一种代价。'
+        : '想换一条线，可以试试留在宫里接印；或者继续查旧档，看另一条证据链。';
+    } else if (type === 'executed') {
+      rows = [
+        row('有效线索', `${effective} / 3`, effective >= 3),
+        row('最后选择', '未呈证 / 证据不足', null)
+      ].join('');
+      cond = '有效线索 <3，或在终局选择不作为。';
+      hint = '先学艺到才学 30，查「罪籍画押」；至少带 3 份线索进终局，5 份才稳。';
+    } else if (type === 'dismissed') {
+      rows = [
+        row('清誉', `${rep} / 25`, rep >= 25),
+        row('上官信任', `${trust} / 15`, trust >= 15)
+      ].join('');
+      cond = '清誉 <25 或上官信任 <15。';
+      hint = '清誉低于 25 或信任低于 15 会被挡在门外；少做高风险布局。';
+    } else if (type === 'silenced') {
+      rows = [
+        row('危机', `${risk} / 95`, risk < 95),
+        row('线索', `${c} / 6`, c >= 6)
+      ].join('');
+      cond = '危机 ≥95 且线索 <6。';
+      hint = '危机到 95 且线索不足会灭口；查档前先歇息降危机。';
+    } else if (type === 'ill') {
+      rows = [
+        row('疲劳', `${fatigue} / 100`, fatigue < 100),
+        row('线索', `${c} / 6`, null)
+      ].join('');
+      cond = '疲劳达到 100。';
+      hint = '疲劳到 100 会灯枯；疲劳 75 以上就该歇息。';
+    } else if (type === 'deal') {
+      rows = [
+        row('最后选择', '与郑铨交易', null),
+        row('有效线索', `${effective} / 5`, effective >= 5)
+      ].join('');
+      cond = '在终局选择与郑铨交易。';
+      hint = '想让姐姐无罪，需要 5 份有效线索，再满足清誉 50 或信任 60。';
+    } else if (type === 'seal') {
+      rows = [
+        row('最后选择', '烧掉证据', null),
+        row('查得线索', `${c} / 6`, null)
+      ].join('');
+      cond = '在终局选择烧掉证据、封存卷宗。';
+      hint = '证据足够时，当堂呈证或请顾清和代奏，才能翻案。';
+    } else if (type === 'forgery') {
+      rows = [
+        row('伪造手令', '失败', false),
+        row('手段', `${state.stats.scheme} / 40`, state.stats.scheme >= 40)
+      ].join('');
+      cond = '伪造提审手令失败。';
+      hint = '手段 40 以下不要伪造；失败会直接反坐。';
+    }
+    const allyList = ['gu', 'pei', 'lu', 'zhou'].filter((key) => bondStance(key) === 'ally');
+    const route = state.flags.guTestified
+      ? '顾清和代奏'
+      : state.flags.luSeal
+        ? '陆知微调封条'
+        : state.flags.peiTestified
+          ? '裴小满带车夫'
+          : '';
+    if (rows) rows += row('人情立场', `${allyList.length} / 4 可托付`, allyList.length >= 2);
+    if (route) rows += row('最后一张牌', route, true);
+    return { rows, hint, cond };
+  }
+
+  function bondUnlockText(key) {
+    const unlock = {
+      gu: '关系 4 且信任 55，解锁「旧档夹页」',
+      pei: '关系 3，解锁「提审时辰」',
+      lu: '关系 3，解锁「汇通号」',
+      zhou: '关系 3，解锁「通州车马」'
+    };
+    return unlock[key] || '';
+  }
+
+  function bondArcText(key) {
+    const a2 = state.flags['arc_' + key + '_2'];
+    const a4 = state.flags['arc_' + key + '_4'];
+    return `关系 2 的私事：${a2 ? '已发生' : '未发生'} · 关系 4 的托付：${a4 ? '已发生' : '未发生'}`;
+  }
+
+  function showLogModal() {
+    if (!state) return;
+    const entries = state.log.slice().reverse().map((entry) => `
+      <div class="log-entry ${entry.type || ''}">
+        <span class="log-day">第 ${entry.day} 日</span>
+        ${escapeHtml(entry.text)}
+      </div>
+    `).join('') || '<div class="log-entry"><span class="log-day">第 1 日</span>值房里很安静。你听见自己的心跳。</div>';
+    queueModal({
+      kicker: '案牍',
+      title: '全部案牍',
+      html: `<div class="log-modal-meta">共 ${state.log.length} 条 · 按时间倒序 · 向下滚动查看更早</div><div class="log-modal-list">${entries}</div>`,
+      choices: [{ label: '合上' }]
+    });
+  }
+
+  function showBondDetail(key) {
+    if (!state || !SOCIALS[key]) return;
+    const p = SOCIALS[key];
+    const level = state.relations[key] || 0;
+    const stance = bondStance(key);
+    queueModal({
+      kicker: '人情 · ' + p.name,
+      title: p.role,
+      body: [
+        p.desc,
+        `当前关系 ${level}/5 · ${bondStanceLabel(key)}。${bondUnlockText(key)}。`,
+        bondArcText(key),
+        stance === 'ally'
+          ? '终局里，这个人会替你说话。但要看你在中盘怎么选。'
+          : stance === 'cold'
+            ? '终局里，这个人不会替你出头。低关系也有低关系的走法。'
+            : '再走一次，才可能到“可托付”。'
+      ],
+      note: p.effect,
+      choices: [{ label: '合上' }]
+    });
+  }
+
   function renderGame() {
     if (!state) {
       gameScreen = 'start';
@@ -2230,6 +3760,7 @@ button:focus-visible,
       return;
     }
     const rank = RANKS[state.rank];
+    const spec = specialization();
     const c = clueCount();
     const left = Math.max(1, MAX_DAY + 1 - state.day);
     const isLast = state.day >= MAX_DAY;
@@ -2238,17 +3769,17 @@ button:focus-visible,
     const trustGain = minTrust === maxTrust ? String(minTrust) : `${minTrust}–${maxTrust}`;
     const flavor = DAY_FLAVOR[Math.min(DAY_FLAVOR.length - 1, state.day - 1)];
     const date = DAY_DATES[Math.min(DAY_DATES.length - 1, state.day - 1)];
-    let nextExam = '已至终考';
-    let examReq = '终考：第 30 日';
-    if (state.rank === 0) {
-      nextExam = state.day < 11 ? '第 11 日' : '已错过';
-      examReq = state.day < 11 ? '信任 25 · 才学 25 · 线索 1' : '第 11 日考功已过，位分停留';
-    } else if (state.rank === 1) {
-      nextExam = state.day < 21 ? '第 21 日' : '已错过';
-      examReq = state.day < 21 ? '信任 45 · 才学 45 · 人望 25 · 线索 3' : '第 21 日考功已过，位分停留';
-    }
+    const exam = examPlan();
+    const effective = effectiveClues();
+    const reqs = exposeReqs();
+    const canExpose = effective >= 5 && state.stats.reputation >= reqs.reputation && state.stats.risk < reqs.risk;
+    const canGu = effective >= 5 && state.stats.trust >= reqs.trust;
+    const evidenceDone = effective >= 5;
+    const evidenceStatus = !evidenceDone
+      ? `有效 ${effective} / 5 · 还差 ${5 - effective} 份`
+      : (canExpose || canGu ? '有效线索已够，可以呈证' : '线索已够，清誉/信任仍不足');
 
-    const logHtml = state.log.slice(-40).reverse().map((entry) => `
+    const logHtml = state.log.slice(-3).reverse().map((entry) => `
       <div class="log-entry ${entry.type || ''}">
         <span class="log-day">第 ${entry.day} 日</span>
         ${escapeHtml(entry.text)}
@@ -2268,18 +3799,6 @@ button:focus-visible,
       `;
     }).join('');
 
-    const relHtml = Object.keys(SOCIALS).map((key) => {
-      const person = SOCIALS[key];
-      const level = state.relations[key] || 0;
-      return `
-        <div class="relation-row">
-          <span><span class="name">${person.name}</span><br><span class="role">${person.role}</span></span>
-          <span class="relation-pips">${relationPips(level)}</span>
-          <span class="level">${level}/5</span>
-        </div>
-      `;
-    }).join('');
-
     let tip = '每天只能做一件事。先活下来，再查案。';
     if (c >= 5) tip = '证据已经够了。最后一日，三司会审。';
     else if (state.stats.fatigue >= 75) tip = '你太累了。再撑下去，会出事。';
@@ -2292,10 +3811,13 @@ button:focus-visible,
       <div class="game-shell">
         <header class="topbar">
           <div class="brand">
-            <h1>御前典簿司</h1>
-            <span>三十日翻案录</span>
+            <h1>${escapeHtml(state.name)}</h1>
+            <span>御前典簿司 · ${rank.name}</span>
           </div>
           <div class="topmeta">
+            <button class="spec-badge ${state.specUses.feat ? 'used' : ''}" type="button" data-action="specialty" title="${spec ? escapeHtml(spec.passive) : '选择专精'}">
+              <span>专精</span>${spec ? spec.name : '未定'}
+            </button>
             <span>第 <b>${state.day}</b> / ${MAX_DAY} 日</span>
             <span>银 <b>${state.silver}</b> 两</span>
             <button class="icon-btn" data-action="menu">菜单</button>
@@ -2313,6 +3835,19 @@ button:focus-visible,
           <div class="case-metric"><span>危机</span><b class="${state.stats.risk >= 60 ? 'danger' : ''}">${state.stats.risk}</b></div>
         </div>
 
+        <div class="bond-strip" aria-label="人情关系">
+          <span class="bond-strip-title">人情</span>
+          ${Object.keys(SOCIALS).map((key) => {
+            const p = SOCIALS[key];
+            const level = state.relations[key] || 0;
+            return `<button class="bond-chip" type="button" data-bond="${key}" title="${escapeHtml(p.role)} · ${escapeHtml(p.effect)}">
+              <span class="bond-name">${p.name}</span>
+              <span class="bond-pips">${relationPips(level)}</span>
+              <b>${level}/5</b>
+            </button>`;
+          }).join('')}
+        </div>
+
         <div class="game-grid">
           <main>
             <section class="paper story-panel">
@@ -2323,6 +3858,7 @@ button:focus-visible,
                 </div>
                 <p class="day-flavor">${flavor}</p>
                 <div class="log-scroll" tabindex="0" role="region" aria-label="案牍记录">${logHtml}</div>
+                <button class="log-more" type="button" data-action="log">查看全部案牍 <span>共 ${state.log.length} 条</span></button>
               </div>
             </section>
 
@@ -2336,7 +3872,7 @@ button:focus-visible,
               <button class="action-card" data-action="investigate" ${state.ended ? 'disabled' : ''}>
                 <strong>查档</strong>
                 <small>调阅卷宗，找出翻案的证据。</small>
-                <em><span>获取线索 · 才学 +1</span><span class="cost">疲劳 +10–14 · 危机 +2–8</span></em>
+                <em><span>获取线索 · 才学 +1</span><span class="cost">疲劳 +4–14 · 危机 +2–8</span></em>
               </button>
               <button class="action-card" data-action="study" ${state.ended ? 'disabled' : ''}>
                 <strong>学艺</strong>
@@ -2346,7 +3882,7 @@ button:focus-visible,
               <button class="action-card" data-action="social" ${state.ended ? 'disabled' : ''}>
                 <strong>走动</strong>
                 <small>去见一个人。人情也是证据。</small>
-                <em><span>关系 +1</span><span class="cost">银 −2 · 疲劳 +8</span></em>
+                <em><span>关系 +1</span><span class="cost">银 −${socialCost()} · 疲劳 +8</span></em>
               </button>
               <button class="action-card ${state.stats.scheme < 25 ? 'locked' : ''}" data-action="scheme" ${state.ended ? 'disabled' : ''}>
                 <strong>布局</strong>
@@ -2372,8 +3908,9 @@ button:focus-visible,
                 <div class="rank-track">
                   ${RANKS.map((r, i) => `<span class="${i <= state.rank ? 'on' : ''}"></span>`).join('')}
                 </div>
-                <div class="rank-caption">下次考功：${nextExam}</div>
-                <div class="rank-req">${examReq}</div>
+                <div class="rank-caption">${exam.title}</div>
+                <div class="exam-list">${exam.rows}</div>
+                <div class="rank-req">${exam.note}</div>
                 <div class="stats-list">
                   ${statRow('才学', 'talent', 'blue')}
                   ${statRow('人望', 'popularity', 'green')}
@@ -2394,17 +3931,15 @@ button:focus-visible,
                 <div class="evidence-track" aria-hidden="true">
                   ${CLUE_IDS.map((_, i) => `<i class="${i < c ? 'on' : ''}"></i>`).join('')}
                 </div>
-                <div class="evidence-goal">当堂翻案至少需要 5 份线索</div>
+                <div class="evidence-goal ${evidenceDone ? (canExpose || canGu ? 'ok' : 'warn') : ''}">${evidenceStatus}</div>
+                <div class="evidence-checks">
+                  <span class="${canExpose ? 'ok' : 'bad'}">当堂：清誉 ${state.stats.reputation}/${reqs.reputation} · 危机 ${state.stats.risk}/${reqs.risk}</span>
+                  <span class="${canGu ? 'ok' : 'bad'}">代奏：信任 ${state.stats.trust}/${reqs.trust}</span>
+                </div>
                 <div class="clue-list">${clueHtml}</div>
               </div>
             </section>
 
-            <section class="paper side-panel">
-              <div class="paper-inner">
-                <div class="side-head"><h3>人情</h3><span>走动可增长</span></div>
-                <div class="relation-list">${relHtml}</div>
-              </div>
-            </section>
           </aside>
         </div>
       </div>
@@ -2414,6 +3949,7 @@ button:focus-visible,
   function renderEnding() {
     const ending = ENDINGS[state.ending] || ENDINGS.executed;
     const gallery = getGallery();
+    const review = endingReview(state.ending);
     const body = ending.body.map((p) => `<p>${p}</p>`).join('') + `<p class="last-line">${ending.last}</p>`;
     $app().innerHTML = `
       <main class="ending-screen">
@@ -2422,15 +3958,25 @@ button:focus-visible,
           <h1 class="ending-title">${ending.title}</h1>
           <div class="ending-sub">${ending.sub}</div>
           <div class="ending-rule"></div>
-          <div class="paper ending-body"><div class="paper-inner">${body}</div></div>
+          <div class="paper ending-body"><div class="paper-inner">
+            ${body}
+            <div class="ending-review">
+              <div class="review-head">本局复盘 · 本局达成</div>
+              <div class="review-grid">${review.rows}</div>
+              <p class="review-cond">触发条件：${review.cond}</p>
+              <p class="review-hint">下一局：${review.hint}</p>
+            </div>
+          </div></div>
           <div class="ending-stats">
             <span>最终位分 <b>${RANKS[state.rank].name}</b></span>
             <span>查得线索 <b>${clueCount()} / 6</b></span>
             <span>上官信任 <b>${state.stats.trust}</b></span>
             <span>清誉 <b>${state.stats.reputation}</b></span>
+            <span>人情 <b>${['gu', 'pei', 'lu', 'zhou'].filter((key) => bondStance(key) === 'ally').length} / 4 可托付</b></span>
           </div>
           <div class="ending-actions">
             <button class="btn-primary" data-action="restart">再来一世 <span class="arrow">→</span></button>
+            ${readPreFinale() ? '<button class="btn-ghost" data-action="prefinale">回到终局前</button>' : ''}
             <button class="btn-ghost" data-action="gallery">结局图鉴</button>
           </div>
           <div class="ending-collection">已收集 ${gallery.length} / ${Object.keys(ENDINGS).length} 个结局</div>
@@ -2442,6 +3988,7 @@ button:focus-visible,
   /* ---------------- 开始 / 继续 ---------------- */
 
   function startNewGame(name) {
+    clearPreFinale();
     state = newGame((name || '').trim() || '沈青梧');
     gameScreen = 'game';
     addLog('你走进御前典簿司。值房里只有一张空案，案上放着一支旧笔。', '');
@@ -2465,6 +4012,7 @@ button:focus-visible,
           addLog('你接过笔。顾清和看了你很久，转身走了。', 'rank');
           save();
           render();
+          queueSpecialtyChoice();
         }
       }]
     });
@@ -2490,14 +4038,18 @@ button:focus-visible,
             state.flags.introSeen = true;
             save();
             render();
+            queueSpecialtyChoice();
           }
         }]
       });
+    } else if (!state.ended && !state.specialization) {
+      queueSpecialtyChoice();
     }
   }
 
   function restart() {
     clearSave();
+    clearPreFinale();
     state = null;
     gameScreen = 'start';
     clearModal();
@@ -2540,13 +4092,14 @@ button:focus-visible,
 
   function actionSocial() {
     if (!guard()) return;
+    const cost = socialCost();
     const choices = Object.keys(SOCIALS).map((key) => {
       const p = SOCIALS[key];
       const level = state.relations[key] || 0;
       return {
         label: p.name + ' · ' + p.role,
-        sub: p.effect + ' · 当前关系 ' + level + '/5 · 银 −2 · 疲劳 +8',
-        disabled: state.silver < 2,
+        sub: p.effect + ' · 当前关系 ' + level + '/5 · 银 −' + cost + ' · 疲劳 +8',
+        disabled: state.silver < cost,
         action: () => resolveSocial(key)
       };
     });
@@ -2560,7 +4113,7 @@ button:focus-visible,
       title: '今日去见谁？',
       body: [
         '宫里的人情，是一张一张纸叠起来的。你只有一次机会，把纸递到对的人手里。',
-        state.silver < 2 ? '你摸了摸袖袋，连一包点心的钱都不够。' : '袖袋里还有 ' + state.silver + ' 两银子。'
+        state.silver < socialCost() ? '你摸了摸袖袋，连一包点心的钱都不够。' : '袖袋里还有 ' + state.silver + ' 两银子。'
       ],
       choices
     });
@@ -2568,18 +4121,20 @@ button:focus-visible,
 
   function resolveSocial(key) {
     if (!guard()) return;
-    if (state.silver < 2) {
+    const cost = socialCost();
+    if (state.silver < cost) {
       showToast('你连一包点心的钱都没有。');
       return;
     }
     const p = SOCIALS[key];
     const rel = {};
     rel[key] = 1;
-    applyMods({ silver: -2, fatigue: 8, rel });
+    applyMods({ silver: -cost, fatigue: 8, rel });
     if (key === 'gu') applyMods({ trust: 4, popularity: 1 });
     if (key === 'pei') applyMods({ popularity: 5, mood: 2 });
     if (key === 'lu') applyMods({ scheme: 4, talent: 1 });
     if (key === 'zhou') applyMods({ popularity: 2, mood: 1 });
+    if (state.specialization === 'human') applyMods({ popularity: 2 });
     addLog(pick(p.lines), '');
     checkSocialClue(key);
     advance();
@@ -2607,16 +4162,25 @@ button:focus-visible,
       showToast('六份卷宗都已查过。剩下的，是怎么用它们。');
       return;
     }
+    const spec = specialization();
     const choices = ARCHIVES.map((a) => {
       const known = state.clues[a.id];
       const can = a.req(state);
+      const fatigue = archiveFatigue(a);
       return {
         label: a.name + (known ? ' · 已查得' : ''),
-        sub: known ? CLUES[a.id].title : (can ? `${a.desc} 疲劳 +${a.fatigue} · 危机 +${a.risk}` : '需要：' + a.reqText),
+        sub: known ? CLUES[a.id].title : (can ? `${a.desc} 疲劳 +${fatigue} · 危机 +${a.risk}` : '需要：' + a.reqText),
         disabled: known || !can,
         action: () => resolveArchive(a)
       };
     });
+    if (spec && !state.specUses.shortcut && !state.clues[spec.clue]) {
+      choices.unshift({
+        label: `${spec.name}捷径 · ${CLUES[spec.clue].label}`,
+        sub: `${spec.shortcut} · 疲劳 +8 · 危机 +4 · 仅一次`,
+        action: () => resolveSpecialtyArchive()
+      });
+    }
     choices.push({
       label: '先回去',
       sub: '不消耗今日。',
@@ -2641,9 +4205,20 @@ button:focus-visible,
       showToast('你还没有调阅这份卷宗的资格。');
       return;
     }
-    applyMods({ fatigue: a.fatigue, risk: a.risk, talent: 1 });
+    applyMods({ fatigue: archiveFatigue(a), risk: a.risk, talent: 1 });
     addClue(a.id);
     addLog('你调出了' + a.name + '。灯下看了很久，终于在一处不起眼的地方停住。', 'clue');
+    advance();
+  }
+
+  function resolveSpecialtyArchive() {
+    if (!guard()) return;
+    const spec = specialization();
+    if (!spec || state.specUses.shortcut || state.clues[spec.clue]) return;
+    state.specUses.shortcut = true;
+    applyMods({ fatigue: 8, risk: 4, talent: 1 });
+    addClue(spec.clue);
+    addLog(`你没有走调卷的正规手续。${spec.shortcut}，把「${CLUES[spec.clue].label}」抄进了自己的册子。`, 'clue');
     advance();
   }
 
@@ -2684,10 +4259,10 @@ button:focus-visible,
         },
         {
           label: '仿一份提审手令',
-          sub: '需手段 40 · 五成成功 · 失败即终局',
+          sub: `需手段 40 · ${forgeChance() === 0.8 ? '八成' : '五成'}成功 · 失败即终局`,
           disabled: state.stats.scheme < 40,
           action: () => {
-            if (chance(0.5)) {
+            if (chance(forgeChance())) {
               state.flags.forged = true;
               applyMods({ scheme: 4, risk: 12, fatigue: 10, mood: -4 });
               addLog('你对着旧手令练了三夜。新纸做旧，印色也调得八九不离十。', 'danger');
@@ -2736,6 +4311,30 @@ button:focus-visible,
       save();
       render();
       setTimeout(() => ending('ill'), 260);
+      return;
+    }
+
+    const festival = FESTIVALS[state.day];
+    if (festival && !state.flags['festival' + state.day]) {
+      showFestival(state.day);
+      render();
+      pumpModals();
+      return;
+    }
+
+    const beat = STORY_BEATS[state.day];
+    if (beat && !state.flags['beat' + state.day]) {
+      showBeat(state.day);
+      render();
+      pumpModals();
+      return;
+    }
+
+    const arc = pendingBondArc();
+    if (arc) {
+      showBondArc(arc.key, arc.arc);
+      render();
+      pumpModals();
       return;
     }
 
@@ -2795,13 +4394,9 @@ button:focus-visible,
     }
   }
 
-  function maybeEvent() {
-    if (state.day >= MAX_DAY) return;
-    if (!chance(0.42)) return;
-    const pool = EVENTS.filter((ev) => !state.seenEvents.includes(ev.id));
-    if (!pool.length) return;
-    const ev = pick(pool);
-    state.seenEvents.push(ev.id);
+  function triggerEvent(ev) {
+    if (!ev || !state) return;
+    if (!state.seenEvents.includes(ev.id)) state.seenEvents.push(ev.id);
     queueModal({
       kicker: ev.kicker || '值房夜话',
       title: ev.title,
@@ -2821,11 +4416,26 @@ button:focus-visible,
     });
   }
 
+  function maybeEvent() {
+    if (state.day >= MAX_DAY) return;
+    if (!chance(0.42)) return;
+    const pool = EVENTS.filter((ev) => !state.seenEvents.includes(ev.id));
+    if (!pool.length) return;
+    triggerEvent(pick(pool));
+  }
+
   /* ---------------- 终局 ---------------- */
 
   function showFinale() {
     if (!state || state.ended) return;
+    if (state.day >= MAX_DAY && !state.flags.preFinaleSaved) {
+      savePreFinale();
+      state.flags.preFinaleSaved = true;
+      save();
+    }
     const c = clueCount();
+    const effective = effectiveClues();
+    const reqs = exposeReqs();
     if (state.stats.fatigue >= 100) {
       ending('ill');
       return;
@@ -2843,7 +4453,7 @@ button:focus-visible,
       });
       return;
     }
-    if (c < 3) {
+    if (effective < 3) {
       queueModal({
         kicker: '十一月初六 · 秋决',
         title: '证据不够',
@@ -2856,23 +4466,55 @@ button:focus-visible,
       return;
     }
 
-    const effective = c + (state.flags.forged ? 1 : 0);
-    const canExpose = effective >= 5 && state.stats.reputation >= 50 && state.stats.risk < 85;
-    const canGu = effective >= 5 && state.stats.trust >= 60;
+    const guAlly = bondStance('gu') === 'ally';
+    const peiAlly = bondStance('pei') === 'ally';
+    const luAlly = bondStance('lu') === 'ally';
+    const zhouAlly = bondStance('zhou') === 'ally';
+    const canExpose = effective >= 5 && state.stats.reputation >= reqs.reputation && state.stats.risk < reqs.risk;
+    const canGu = effective >= 5 && state.stats.trust >= reqs.trust && guAlly;
+    const canLu = effective >= 5 && luAlly && state.flags.arc_lu_4 && hasMark('lu_seal') && state.stats.risk < reqs.risk;
+    const canPei = effective >= 4 && peiAlly && state.flags.arc_pei_4 && hasMark('pei_witness') && !state.clues.witness;
+    const canZhou = zhouAlly && state.flags.arc_zhou_4 && hasMark('zhou_key');
+    if (canZhou) state.flags.zhouReady = true;
+
     const choices = [];
 
     if (canExpose) {
       choices.push({
         label: '当堂呈上全部证据',
         sub: '把六份卷宗，一件一件摆到三司面前。',
-        action: () => exposeChoice()
+        action: () => exposeChoice('expose')
       });
     }
     if (canGu) {
       choices.push({
         label: '请顾清和代为上奏',
         sub: '她还有一份直达御前的奏本。',
-        action: () => exposeChoice()
+        action: () => {
+          state.flags.guTestified = true;
+          exposeChoice('gu');
+        }
+      });
+    }
+    if (canLu) {
+      choices.push({
+        label: '让陆知微从刑部调出封条',
+        sub: '曹家仓的底账会被封在堂上，谁也改不了。',
+        action: () => {
+          state.flags.luSeal = true;
+          exposeChoice('lu');
+        }
+      });
+    }
+    if (canPei) {
+      choices.push({
+        label: '让裴小满把车夫带进堂',
+        sub: '补上最后一份口供。',
+        action: () => {
+          addClue('witness');
+          state.flags.peiTestified = true;
+          exposeChoice('pei');
+        }
       });
     }
     choices.push({
@@ -2891,30 +4533,61 @@ button:focus-visible,
       action: () => ending('executed')
     });
 
+    const stanceBits = [];
+    if (guAlly) stanceBits.push('顾清和把印信放在你这边');
+    if (peiAlly) stanceBits.push('裴小满攥着旧簿站在堂外');
+    if (luAlly) stanceBits.push('陆知微的封条已经盖好');
+    if (zhouAlly) stanceBits.push('老周在角门备了车');
+    const stanceLine = stanceBits.length ? stanceBits.join('；') + '。' : '堂上没有人替你说话。';
+    const markLines = [];
+    if (hasMark('refuse_transfer')) markLines.push('你没有签那张调令。顾清和因此多看了你一眼。');
+    if (hasMark('kept_copy')) markLines.push('调令的抄本还在你鞋底。纸边已经磨毛了。');
+    if (hasMark('raided_cang')) markLines.push('你摸进曹家仓那晚，门缝里的新米味还在鼻子里。');
+    if (hasMark('burned_letter')) markLines.push('姐姐的信被你烧了。“饭要好好吃”那一行，你还记得。');
+    if (hasMark('gave_letter')) markLines.push('你把信交给顾清和。她今天没有提那封信。');
+    if (hasMark('took_bribe')) markLines.push('郑铨的人坐在旁听席。他知道你收过那张银票。');
+    if (hasMark('refused_bribe')) markLines.push('你把银票推回去那件事，郑铨记住了。');
+    if (hasMark('kept_ticket')) markLines.push('你抄下的票号，和军粮款是同一批。');
+    if (hasMark('trusted_gu')) markLines.push('顾清和把钥匙放在你案上。她这次没有收回去。');
+    if (hasMark('broke_in')) markLines.push('你翻窗进过档案库。木刺留下的伤口还没好。');
+    if (hasMark('built_case')) markLines.push('你把每一份卷宗都写上了来源。那些字，今天要念给三司听。');
+    if (canZhou) markLines.push('老周在角门外备了一辆车。他谁也没告诉。');
+
     queueModal({
       kicker: '十一月初六 · 三司会审',
       title: '最后一日',
       body: [
-        '三司会审设在刑部大堂。你站在门外，怀里抱着六份卷宗。',
+        '三司会审设在刑部大堂。你站在门外，怀里抱着卷宗。',
         canExpose
           ? '证据够了。但你也知道，只要递上去，就没有回头路。'
           : '证据还差一点。你可以递，也可以拿它去换别的东西。',
-        state.flags.forged ? '其中一份手令，是你自己仿的。没有人看出来。' : ''
+        state.flags.forged ? '其中一份手令，是你自己仿的。没有人看出来。' : '',
+        stanceLine,
+        markLines.join(' ')
       ].filter(Boolean),
       note: '这是最后的选择。',
       choices
     });
   }
 
-  function exposeChoice() {
+  function exposeChoice(route = 'expose') {
+    const routeLine = route === 'gu'
+      ? '顾清和代你出列。她没有念奏本，只把姐姐的旧口供一页一页摊在御前。'
+      : route === 'lu'
+        ? '陆知微带着刑部封条进堂。曹家仓的底账被封在公案上，郑铨的人晚了一步。'
+        : route === 'pei'
+          ? '裴小满把车夫带进堂。车夫腿在抖，但还是把那句“粮袋在码头换过”说完了。'
+          : '你自己把卷宗一件一件摆上去。堂上很安静，只能听见纸页摩擦的声音。';
     queueModal({
       kicker: '三司会审 · 案已翻',
       title: '你要什么？',
       body: [
+        routeLine,
         '曹弼被当场拿下。郑铨坐在上首，脸色很白。堂上安静了很久，才有人敲下惊堂木。',
         '姐姐的案子翻了。她从狱里出来时，天已经黑了。',
-        '顾清和把御前女官的印信推到你面前。姐姐站在门外，没有进来。'
-      ],
+        '顾清和把御前女官的印信推到你面前。姐姐站在门外，没有进来。',
+        state.flags.zhouReady ? '角门外停着一辆旧车。老周坐在车辕上，没有进来。' : ''
+      ].filter(Boolean),
       note: '你只能选一次。',
       choices: [
         {
@@ -3247,6 +4920,153 @@ button:focus-visible,
         }
       ]
     }
+    ,
+    {
+      id: 'pie',
+      title: '掌司画的饼',
+      text: [
+        '顾清和把一摞卷宗推到你面前：“好好干。等这案子结了，我给你请封。”',
+        '她说完，自己先笑了。',
+        '你想起姐姐当年也坐这个位置。'
+      ],
+      choices: [
+        {
+          label: '谢掌司栽培',
+          sub: '信任 +3 · 心情 −3',
+          effect: () => applyMods({ trust: 3, mood: -3 }),
+          log: '你把饼咽了，没喝水。顾清和看了你一眼，像是满意，又像是没眼看。'
+        },
+        {
+          label: '问能不能折现',
+          sub: '银 +2 · 信任 −2 · 心情 +6',
+          effect: () => applyMods({ silver: 2, trust: -2, mood: 6 }),
+          log: '顾清和愣了一下，从抽屉里摸出二两银子：“拿去。别到处说。”'
+        },
+        {
+          label: '把饼记进账本',
+          sub: '才学 +2 · 手段 +2 · 危机 +2',
+          effect: () => applyMods({ talent: 2, scheme: 2, risk: 2 }),
+          log: '你在账本背面写：某年某月，掌司画饼一张，未兑现。写完，心情好多了。'
+        }
+      ]
+    },
+    {
+      id: 'overtime',
+      title: '三更的卷宗',
+      text: [
+        '三更，顾清和把一摞卷宗放在你案上：“明早要。”',
+        '她顿了顿，又补了一句：“能抄多少算多少。”',
+        '你看着那摞纸，觉得它比姐姐的案卷还高。'
+      ],
+      choices: [
+        {
+          label: '通宵抄完',
+          sub: '才学 +4 · 疲劳 +14 · 信任 +3',
+          effect: () => applyMods({ talent: 4, fatigue: 14, trust: 3 }),
+          log: '你抄到天亮，右手食指磨出一个水泡。顾清和来取卷宗时，把一盏热茶放在你手边。'
+        },
+        {
+          label: '装病',
+          sub: '心情 +4 · 信任 −2 · 危机 +2',
+          effect: () => applyMods({ mood: 4, trust: -2, risk: 2 }),
+          log: '你捂着肚子说疼。顾清和看了你三秒，把卷宗抱走了。第二天，你的案上多了一碗药。'
+        },
+        {
+          label: '拉裴小满一起',
+          sub: '才学 +3 · 疲劳 +8 · 裴小满 +1',
+          effect: () => applyMods({ talent: 3, fatigue: 8, rel: { pei: 1 } }),
+          log: '你和裴小满分了一人一半。她抄到一半趴在桌上睡着了，嘴里还念着“沈姐姐，别告诉掌司”。'
+        }
+      ]
+    },
+    {
+      id: 'pot',
+      title: '同僚甩锅',
+      text: [
+        '裴小满把一页抄错的账推给你，眼圈发红：“沈姐姐，就说是你抄的，好不好？我弟弟还在外头等我送钱。”',
+        '那页账错得很明显，掌司一眼就能看出来。',
+        '你想起自己刚进宫时，也这样求过人。'
+      ],
+      choices: [
+        {
+          label: '替她背',
+          sub: '清誉 −3 · 裴小满 +2 · 心情 −2',
+          effect: () => applyMods({ reputation: -3, mood: -2, rel: { pei: 2 } }),
+          log: '你说是自己抄错的，挨了掌籍女史一顿训。裴小满在门外等你，手里攥着一块凉糕。'
+        },
+        {
+          label: '让她自己改',
+          sub: '才学 +2 · 清誉 +1 · 裴小满 −1',
+          effect: () => applyMods({ talent: 2, reputation: 1, rel: { pei: -1 } }),
+          log: '你把账推回去：“你自己改。我替你瞒一次，瞒不了一辈子。”裴小满哭了，但还是改了。'
+        },
+        {
+          label: '一起改，留底稿',
+          sub: '才学 +2 · 疲劳 +6 · 危机 +1 · 裴小满 +1',
+          effect: () => applyMods({ talent: 2, fatigue: 6, risk: 1, rel: { pei: 1 } }),
+          log: '你们把错账重抄了一遍，底稿锁进你的柜子。裴小满说：“沈姐姐，你以后别倒。”'
+        }
+      ]
+    },
+    {
+      id: 'kpi',
+      title: '考功前的暗示',
+      text: [
+        '考功前一夜，掌籍女史路过你案边，低声说：“这次再不过，你就去浣衣局。”',
+        '她说完就走，像只是顺口提了一句。',
+        '你看着案上的考功册，觉得自己像一件等着被估价的旧货。'
+      ],
+      choices: [
+        {
+          label: '连夜背书',
+          sub: '才学 +4 · 疲劳 +10',
+          effect: () => applyMods({ talent: 4, fatigue: 10 }),
+          log: '你把律例抄了三遍，抄到天亮。考功时，掌籍女史看了你的卷子，什么也没说。'
+        },
+        {
+          label: '去求顾清和',
+          sub: '信任 +3 · 危机 +3',
+          effect: () => applyMods({ trust: 3, risk: 3 }),
+          log: '你在顾清和门口站了半刻钟。她开门，只说了一句：“求我没用。把账查明白。”'
+        },
+        {
+          label: '把她的把柄记下来',
+          sub: '手段 +4 · 危机 +5',
+          effect: () => applyMods({ scheme: 4, risk: 5 }),
+          log: '你想起她上个月私放出去的一车旧档，把日期记在账本最后一页。'
+        }
+      ]
+    },
+    {
+      id: 'coldrice',
+      title: '姐姐的牢饭',
+      text: [
+        '老周递进来一个冷馒头，说是你姐姐省下的。',
+        '馒头底下压着一行字：“别查我，查粮。”',
+        '馒头已经硬了，边上留着一个浅浅的牙印。'
+      ],
+      choices: [
+        {
+          label: '吃掉',
+          sub: '心情 +8 · 疲劳 −4',
+          effect: () => applyMods({ mood: 8, fatigue: -4 }),
+          log: '你把馒头掰成小块，就着冷水吃了。很硬，但你吃得很慢。'
+        },
+        {
+          label: '收进袖子里',
+          sub: '心情 +3 · 才学 +1',
+          effect: () => applyMods({ mood: 3, talent: 1 }),
+          log: '你把馒头收进袖子，继续抄账。每写一行，袖子里就轻轻硌一下。'
+        },
+        {
+          label: '托老周带句话',
+          sub: '信任 +2 · 老周 +1 · 危机 +2',
+          effect: () => applyMods({ trust: 2, risk: 2, rel: { zhou: 1 } }),
+          log: '你让老周带话：我不查你，我查粮。老周点点头，把空碗收走了。'
+        }
+      ]
+    }
+
   ];
 
   /* ---------------- 菜单 / 图鉴 ---------------- */
@@ -3351,8 +5171,12 @@ button:focus-visible,
         showGallery();
       } else if (action === 'restart') {
         restart();
+      } else if (action === 'prefinale') {
+        returnToPreFinale();
       } else if (action === 'menu') {
         openMenu();
+      } else if (action === 'log') {
+        showLogModal();
       } else if (action === 'work') {
         actionWork();
       } else if (action === 'investigate') {
@@ -3365,7 +5189,15 @@ button:focus-visible,
         actionScheme();
       } else if (action === 'rest') {
         actionRest();
+      } else if (action === 'specialty') {
+        showSpecialtyModal();
       }
+      return;
+    }
+
+    const bondEl = event.target.closest('[data-bond]');
+    if (bondEl) {
+      showBondDetail(bondEl.dataset.bond);
       return;
     }
 
@@ -3400,9 +5232,22 @@ button:focus-visible,
     actionInvestigate,
     actionSocial,
     actionScheme,
+    showSpecialtyModal,
+    chooseSpecialty,
+    useSpecialtyFeat,
+    clearModal,
+    effectiveClues,
+    exposeReqs,
     advance,
     ending,
+    triggerEvent,
+    eventById: (id) => EVENTS.find((e) => e.id === id),
     showFinale,
+    returnToPreFinale,
+    readPreFinale,
+    bondStance,
+    hasMark,
+    BOND_ARCS,
     clueCount
   };
 })();
